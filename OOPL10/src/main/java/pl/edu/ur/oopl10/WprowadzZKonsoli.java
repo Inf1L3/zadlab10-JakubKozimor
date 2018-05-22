@@ -6,7 +6,12 @@
 package pl.edu.ur.oopl10;
 
 import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 /**
  *
  * @author student
@@ -69,8 +74,49 @@ public class WprowadzZKonsoli {
         catch(InputMismatchException e){
             System.out.println("Błedny typ");
         }
-        
-   
+    }
+   public void ToFileText() throws IOException {
+        String nazwapliku;
+        System.out.println("Podaj nazwę pliku: ");
+        nazwapliku = pobierz.nextLine();
+
+        try {
+            FileWriter plik = new FileWriter(nazwapliku + ".txt");
+            BufferedWriter bw1 = new BufferedWriter(plik);
+            String text;
+            System.out.println("Wpisz do pliku: ");
+            text = pobierz.nextLine();
+            bw1.write(text);
+            bw1.newLine();
+            bw1.close();
+
+        } catch (IOException e) {
+            System.out.println("Błąd zapisu");
+        }
+
+    }
+
+    public void FromFileText() throws FileNotFoundException, IOException {
+        String nazwapliku;
+        System.out.println("Jaki plik odczytac ?");
+        nazwapliku = pobierz.nextLine();
+        try {
+            FileReader r1 = new FileReader(nazwapliku + ".txt");
+            BufferedReader br1 = new BufferedReader(r1);
+
+            String text = br1.readLine();
+
+            do {
+                System.out.println(text);
+                text = br1.readLine();
+
+            } while (text != null);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Nie znaleziono pliku");
+        }
+
+    }
         
         
         
@@ -81,4 +127,4 @@ public class WprowadzZKonsoli {
 
     
     }
-}
+
